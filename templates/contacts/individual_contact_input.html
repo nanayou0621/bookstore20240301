@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}お問い合わせフォーム{% endblock %}
+
+{% block main_name %}{% endblock %}
+{% block banner %}{% endblock %}
+
+{% block contents %}
+<div class="contact_page">
+    <h1>お問い合わせフォーム</h1>
+</div>
+    <div class="contact_form">
+        <form action="{% url 'contacts:individual_confirm' %}" method="POST">
+            <!-- CSRF対策用タグ -->
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+            <div class="formContent">
+                
+                <p>{{ field.label_tag }}</p>
+                {{ field }}
+                {{ field.errors }}
+            </div>
+            {% endfor %}
+            
+       
+        <div class="contact_button">
+            <button type="submit" class="btn btn-primary btn-lg">送信</button>
+        </div>
+        </form>
+        <a class="backToHome" href="{% url 'store:home' %}">ホームに戻る</a>
+    
+</div>
+{% endblock %}

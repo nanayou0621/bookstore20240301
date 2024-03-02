@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block main_name %}{% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title%}本の登録{% endblock%}</title>
+  </head>
+  <body>
+    {% block contents%}
+  <div class="container">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" id="save" value="作成">
+    </form>
+  </div>
+  {% endblock %}

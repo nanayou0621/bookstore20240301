@@ -1,0 +1,1 @@
+[個人]{{form.fullname.value}}からお問い合わせです。

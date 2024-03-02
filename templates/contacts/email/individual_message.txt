@@ -1,0 +1,7 @@
+氏名：{{form.fullname.value}}
+カナ：{{form.kana.value}}
+メールアドレス：{{form.email.value}}
+
+内容
+--------------------------------------------
+{{form.content.value}}

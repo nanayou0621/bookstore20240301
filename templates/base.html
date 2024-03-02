@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="base">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
+    <title>{% block title %}Bookstore{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <section class="pc-menu">
+            <div class="header-top">
+                <div class="logo">
+                  <h1><a href="{% url 'store:home' %}">LOGO</a></h1>
+                </div>
+                <div>
+                <div>
+                    <ul class="nav_sub">
+                        <li><a href="{% url 'store:home' %}">サイトマップ</a></li>
+                        <li><a href="{% url 'contacts:individual_input' %}">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="header-search-top">
+                        <li><a href="{% url 'store:home' %}"><i class="bi bi-cart-fill"></i></a></li>
+                        <li><a href="{% url 'accounts:login' %}"><i class="bi bi-person-fill"></i></a></li>
+                    </ul>
+                </div>
+              </div> 
+        </section>
+        <section class="sp-menu">
+            <div class="header-top">
+                <div class="logo">
+                  <h1><a href="{% url 'store:home' %}">LOGO</a></h1>
+                </div>
+
+                <div class="sp-nav">
+                    <div>
+                        <ul class="nav_sub">
+                            <li><a href="{% url 'store:home' %}">サイトマップ</a></li>
+                            <li><a href="{% url 'contacts:individual_input' %}">お問い合わせ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                    <ul class="header-search-top">
+                        <li><a href="{% url 'store:home' %}"><i class="bi bi-cart-fill"></i></a></li>
+                        <li><a href="{% url 'accounts:login' %}"><i class="bi bi-person-fill"></i></a></li>
+                        <li><span class="material-icons" id="open">
+                        <i class="bi bi-list"></i>
+                    </span></li>
+                    </ul>
+                    </div>
+              </div>
+            </div>
+        </section>
+
+        <div class="overlay">
+            <span class="material-icons" id="close">
+                <i class="bi bi-x-square"></i>
+            </span>
+            <nav>
+                <ul class="sp-menu-container">
+                    <li class="sp-nav-name"><a href="{% url 'store:home' %}">ホーム</a></li>
+                    <li class="sp-nav-name"><a href="{% url 'books:book_list' %}">書籍リスト</a></li>
+                    <li class="sp-nav-name"><a href="{% url 'store:home' %}">DVD・CD</a></li>
+                    <li class="sp-nav-name"><a href="{% url 'store:home' %}">文具・雑貨</a></li>
+                    <li class="sp-nav-name"><a href="{% url 'contacts:individual_input' %}">ベストセラー</a></li>
+                </ul>
+            </nav>
+        </div>
+     <div class="login">
+      {% if user.is_authenticated %}
+      <!-- ログイン中 -->
+      現在{{ user.username }}さんでログイン中です
+      <a href="{% url 'store:home' %}">ホーム</a>
+      <form action="{% url 'accounts:logout' %}" method="post" name="f_logout">
+        {% csrf_token %}
+        <input type="hidden" value="logout">
+        <a href="javascript:f_logout.submit()" class="logout nav-link">Logout</a>
+    </form>
+      <a href="{% url 'store:modelcontent' user.pk %}">カート</a>
+      {% else %}
+      <!-- ログイン状態ではない -->
+      <a href="{% url 'accounts:login' %}">ログイン</a>
+      <a href="{% url 'accounts:signup' %}">新規登録</a>
+
+      
+      {% endif %}
+      </div>
+    </header>
+    <nav class="pc-nav">
+        <ul class="menu-container">
+          <li class="pc-nav-name"><a href="{% url 'store:home' %}">ホーム</a></li>
+          <li class="pc-nav-name"><a href="{% url 'books:book_list' %}">書籍リスト</a></li>
+          <li class="pc-nav-name"><a href="{% url 'store:home' %}">DVD・CD</a></li>
+          <li class="pc-nav-name"><a href="{% url 'store:home' %}">文具・雑貨</a></li>
+          <li class="pc-nav-name"><a href="{% url 'contacts:individual_input' %}">ベストセラー</a></li>
+        </ul>
+      </nav>
+      
+      {% block main_name %}
+      <div class="slider">
+          <div><img src="{% static "images/top1.jpg" %}"></div>
+          <div><img src="{% static "images/top2.jpg" %}"></div>
+          <div><img src="{% static "images/top3.jpg" %}"></div>
+      </div>
+      {% endblock %}
+   
+   <main>
+    <!-- コンテンツを表示する -->
+     {% block contents%}{% endblock%}
+   </main>
+   <!-- フッター -->
+   <footer>
+    <div>
+      <small>Copyright © BookSite Co., Ltd. All rights reserved.</small>
+    </div>
+   </footer>
+   
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    
+ </body>
+ 
+ </html>
+ 
+ 

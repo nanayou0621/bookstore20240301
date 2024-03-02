@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}お問い合わせフォーム{% endblock %}
+
+{% block main_name %}{% endblock %}
+{% block search_name_pc %} {% endblock %}
+{% block search_name_sp %} {% endblock %}
+{% block banner %}{% endblock %}
+
+{% block contents %}
+    {% for field in form %}
+        <div class="form-group">
+            
+            {{ field.label_tag }}
+            {{ field.value }}
+        </div>
+    {% endfor %}
+
+    <hr>
+    <form action="{% url 'contacts:individual_create' %}" method="POST">
+        <button type="submit" class="btn btn-primary btn-lg">送信</button>
+        {% for field in form %}{{ field.as_hidden }}{% endfor %}
+        {% csrf_token %}
+    </form>
+{% endblock %}
